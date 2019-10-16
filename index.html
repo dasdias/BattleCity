@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Battle city</title>
+    <link rel="stylesheet" href="./css/main.css">
+	<link rel="icon" href="static/tank.png"  type="image/x-icon" />
+
+</head>
+
+<body>
+
+
+
+
+    <script src="./engine/Loader.js"></script>
+    <script>
+        const {Loader} = GameEngine;
+        const loader = new Loader;
+
+        loader.addImage('1', './static/1.jpg');
+        loader.addImage('2', './static/2.jpg');
+        loader.addImage('3', './static/3.jpg');
+        loader.addJson('persons', './static/persons.json');
+
+        loader.load(() => {
+            console.log('Images loaded');
+            // console.log(loader.resources.jsons);
+            
+            let jsonsItem = loader.resources.jsons.persons;
+            for (const json of jsonsItem) {
+                console.log(json);
+            }
+
+            let img = loader.resources.images;
+
+            for (const item in img) {
+                let wrapElem = document.createElement('div');
+                document.body.append(img[item]);
+            }
+        });
+
+        // Loader.loadImage('./static/1.jpg').then(image => {
+        //     console.log(image);
+        //     document.body.append(image);
+        // });
+    </script>
+</body>
+
+</html>
