@@ -15,7 +15,7 @@
 
 
 
-
+    <script src="./engine/DisplayObject.js"></script>
     <script src="./engine/Container.js"></script>
     <script src="./engine/Loader.js"></script>
     <script src="./engine/Renderer.js"></script>
@@ -67,6 +67,8 @@
             });
             
             const container = new Container();
+            container.x = 100
+            container.y = 100
             renderer.stage.add(container);
             container.add(sprite);
             container.add(sprite2);
