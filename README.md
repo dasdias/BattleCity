@@ -1,2 +1,2 @@
 # BattleCity
-[Github Pages](ttps://dasdias.github.io/BattleCity/)
+[Github Pages](https://dasdias.github.io/BattleCity/ "Посмотреть страницу")
