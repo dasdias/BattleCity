@@ -25,6 +25,17 @@
             this.loadOrder.jsons.push({name, address});
         }
 
+        // Метод получения изображения
+        getImage(name) {
+            return this.resources.images[name];
+        }
+
+        // Метод получения json
+        getJson (name) {
+            return this.resources.jsons[name];
+        }
+
+
         // метод загрузки
         load(callback) {
             const promises = [];

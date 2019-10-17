@@ -16,10 +16,38 @@
 
 
 
+    <script src="./engine/Container.js"></script>
     <script src="./engine/Loader.js"></script>
+    <script src="./engine/Renderer.js"></script>
+    <script src="./engine/Sprite.js"></script>
+
     <script>
-        const {Loader} = GameEngine;
+        const {Loader, Renderer, Sprite, Container} = GameEngine;
+
+        let sprite = null;
+        let sprite2 = null;
+
         const loader = new Loader;
+        const renderer = new Renderer({
+            width: 500,
+            height: 500,
+            background: 'grey',
+
+            update (timestamp) {
+                if (!sprite && !sprite2) {
+                    return
+                }
+                sprite.x = renderer.canvas.width / 2 + 100 * Math.cos(timestamp / 200)
+                sprite.y = renderer.canvas.height / 2 + 100 * Math.sin(timestamp / 200)
+                
+                sprite2.frame.x = sprite.texture.width / 2 + 800 * Math.cos(timestamp / 300)
+                // sprite2.frame.y = sprite.texture.height / 2 + 200 * Math.sin(timestamp / 200)
+                // sprite2.x = renderer.canvas.width / 2 + 300 * Math.cos(timestamp / 200)
+                }
+        });
+
+        
+        document.body.append(renderer.canvas)
 
         loader.addImage('1', './static/1.jpg');
         loader.addImage('2', './static/2.jpg');
@@ -27,20 +55,36 @@
         loader.addJson('persons', './static/persons.json');
 
         loader.load(() => {
-            console.log('Images loaded');
-            // console.log(loader.resources.jsons);
+            sprite = new Sprite(loader.getImage('1'), {
+                scale: 0.15,
+                anchorX: 0.5,
+                anchorY: 0.5
+            });
+            sprite2 = new Sprite(loader.getImage('2'), {
+                scale: 0.15,
+                anchorX: 0.9,
+                anchorY: 0.9,
+            });
             
-            let jsonsItem = loader.resources.jsons.persons;
-            for (const json of jsonsItem) {
-                console.log(json);
-            }
+            const container = new Container();
+            renderer.stage.add(container);
+            container.add(sprite);
+            container.add(sprite2);
+            
+            sprite2.y = 300
+            sprite2.x = 350
+            // sprite.frame.x = 290
+            // sprite.frame.y = 100
+            // sprite.frame.width = 1130
+            // sprite.frame.height = 1035
 
-            let img = loader.resources.images;
+            // sprite.width = 500
+            // sprite.height = 500
 
-            for (const item in img) {
-                let wrapElem = document.createElement('div');
-                document.body.append(img[item]);
-            }
+            // sprite.x = 150
+            // sprite.y = 150
+            // sprite.width = 100
+            // sprite.height = 100
         });
 
         // Loader.loadImage('./static/1.jpg').then(image => {
