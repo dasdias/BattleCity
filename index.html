@@ -26,6 +26,7 @@
 
         let sprite = null;
         let sprite2 = null;
+        let container = null;
 
         const loader = new Loader;
         const renderer = new Renderer({
@@ -34,13 +35,17 @@
             background: 'grey',
 
             update (timestamp) {
-                if (!sprite && !sprite2) {
+                if (!sprite || !sprite2) {
                     return
                 }
-                sprite.x = renderer.canvas.width / 2 + 100 * Math.cos(timestamp / 200)
-                sprite.y = renderer.canvas.height / 2 + 100 * Math.sin(timestamp / 200)
+                // container.rotation = timestamp / 1000
+                sprite.rotation = timestamp / 1000
+                sprite2.rotation = -timestamp / 1000
+
+                // sprite.x = renderer.canvas.width / 2 + 100 * Math.cos(timestamp / 200)
+                // sprite.y = renderer.canvas.height / 2 + 100 * Math.sin(timestamp / 200)
                 
-                sprite2.frame.x = sprite.texture.width / 2 + 800 * Math.cos(timestamp / 300)
+                // sprite2.frame.x = sprite.texture.width / 2 + 800 * Math.cos(timestamp / 300)
                 // sprite2.frame.y = sprite.texture.height / 2 + 200 * Math.sin(timestamp / 200)
                 // sprite2.x = renderer.canvas.width / 2 + 300 * Math.cos(timestamp / 200)
                 }
@@ -56,25 +61,36 @@
 
         loader.load(() => {
             sprite = new Sprite(loader.getImage('1'), {
+                x: 100,
+                y: 100,
+                // rotation: Math.PI / 2,
                 scale: 0.15,
                 anchorX: 0.5,
                 anchorY: 0.5
             });
             sprite2 = new Sprite(loader.getImage('2'), {
+                x: 100,
+                y: 100, 
+                // rotation: Math.PI / 2,
                 scale: 0.15,
-                anchorX: 0.9,
-                anchorY: 0.9,
+                anchorX: 0.5,
+                anchorY: 0.5,
             });
             
-            const container = new Container();
+            container = new Container();
             container.x = 100
             container.y = 100
+            // container.rotation =Math.PI / 10
+            container.anchorX = 0.5
+            container.anchorY = 0.5
+            container.width = renderer.canvas.width
+            container.height = renderer.canvas.height
             renderer.stage.add(container);
             container.add(sprite);
             container.add(sprite2);
             
-            sprite2.y = 300
-            sprite2.x = 350
+            // sprite2.y = 300
+            // sprite2.x = 350
             // sprite.frame.x = 290
             // sprite.frame.y = 100
             // sprite.frame.width = 1130

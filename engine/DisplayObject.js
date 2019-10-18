@@ -17,7 +17,7 @@
             this.scaleX = args.scaleX || 1;
             this.scaleY = args.scaleY || 1;
 
-            // this.parent = null;
+            this.parent = null;
 
             if (args.scale !== undefined) {
                 this.setScale(args.scale);
@@ -47,16 +47,16 @@
             this.scaleY = scale;
         }
 
-        // setParent (parent) {
-        //     if (this.parent) {
-        //         this.parent.remove(this);
-        //     }
+        setParent (parent) {
+            if (this.parent) {
+                this.parent.remove(this);
+            }
 
-        //     if (parent) {
-        //         parent.add(this);
-        //         this.parent = parent;
-        //     }
-        // }
+            if (parent) {
+                parent.add(this);
+                this.parent = parent;
+            }
+        }
 
         draw () {}
     }

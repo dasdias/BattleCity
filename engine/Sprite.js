@@ -26,17 +26,23 @@
        
 
         draw(canvas, context) {
+            context.save();
+            context.translate(this.x, this.y);
+            context.rotate(-this.rotation);
+            context.scale(this.scaleX, this.scaleY);
+
             context.drawImage(
                 this.texture,
                 this.frame.x,
                 this.frame.y,
                 this.frame.width,
                 this.frame.height,
-                this.absoluteX,
-                this.absoluteY,
+                this.absoluteX - this.scaleX,
+                this.absoluteY - this.scaleY,
                 this.width,
                 this.height
             );
+            context.restore();
         }
     }
 
